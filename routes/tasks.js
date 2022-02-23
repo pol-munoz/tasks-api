@@ -1,0 +1,73 @@
+const express = require('express')
+const router = express.Router()
+const {v4: uuidv4 } = require('uuid')
+
+// Just keep them in memory
+const tasks = {}
+
+/* GET tasks list. */
+router.get('/', function(req, res, next) {
+    const user = req.params.user
+    let userTasks = tasks[user] ?? []
+    res.json(Object.values(userTasks))
+})
+
+/* POST a new task */
+router.post('/', function(req, res, next) {
+    const user = req.params.user
+
+    if (!tasks[user]) {
+        tasks[user] = {}
+    }
+
+    let task = {
+        id: uuidv4(),
+        text: req.body.text,
+        completed: false
+    }
+
+    tasks[user][task.id] = task
+    res.json(task)
+})
+
+/* GET specific task. */
+router.get('/:id', function(req, res, next) {
+    const user = req.params.user
+    const id = req.params.id
+    let userTasks = tasks[user] ?? {}
+    res.json(userTasks[id] ?? {})
+})
+
+/* PATCH specific task. */
+router.patch('/:id', function(req, res, next) {
+    const user = req.params.user
+    const id = req.params.id
+    if (!tasks[user] || !tasks[user][id]) {
+        res.status(404).json({ "error": 'Task not found'})
+        return
+    }
+
+    const completed = req.body.completed ?? tasks[user][id].completed
+    const text = req.body.text || tasks[user][id].text
+
+    tasks[user][id].completed = completed
+    tasks[user][id].text = text
+
+    res.json(tasks[user][id])
+})
+
+/* DELETE specific task. */
+router.delete('/:id', function(req, res, next) {
+    const user = req.params.user
+    const id = req.params.id
+    if (!tasks[user] || !tasks[user][id]) {
+        res.status(404).json({ "error": 'Task not found'})
+        return
+    }
+
+    delete tasks[user][id]
+
+    res.json({})
+})
+
+module.exports = router
