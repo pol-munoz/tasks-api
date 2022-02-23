@@ -34,6 +34,11 @@ router.post('/', function(req, res, next) {
 router.get('/:id', function(req, res, next) {
     const user = req.params.user
     const id = req.params.id
+    if (!tasks[user] || !tasks[user][id]) {
+        res.status(404).json({ "error": 'Task not found'})
+        return
+    }
+
     let userTasks = tasks[user] ?? {}
     res.json(userTasks[id] ?? {})
 })
