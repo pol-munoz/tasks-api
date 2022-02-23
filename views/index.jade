@@ -1,11 +1,110 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}, a simple API for your last challenge.
-  h2 Endpoints
-  p This API offers the following endpoints:
-  h3 Get all tasks
+  main
+    header
+      h1= title
+      p Welcome to #{title}, a simple API for your last challenge.
+    section
+      header
+        h2 Endpoints
+        p Parameters:
+        ul
+          li
+            p
+              code :user
+              |  - Identifies the user's task list.
+          li
+            p
+              code :id
+              |  - Identifies a specific task.
+      article
+        h3 Get all tasks
+        p Returns an array containing the information about all of a user's tasks.
+        p
+          code GET /users/:user/tasks
+        p Response
+        pre
+          code
+            |[
+            |    {
+            |        "id": "8d20b072-6d12-4675-91ed-83f99d20ce12",
+            |        "text": "Finish the JS challenge",
+            |        "completed": true
+            |    },
+            |        ...
+            |    {
+            |        "id": "792eb8ee-e87e-4abf-a0be-06af0e179981",
+            |        "text": "Sleep",
+            |        "completed": false
+            |    },
+            |]
+      article
+        h3 Post a new task
+        p
+          |Receives the text for a new task and creates it. Returns an object containing the information about the newly created task, including its assigned id and status (not completed).
+        p
+          code POST /users/:username/tasks
+        p Body
+        pre
+          code
+            |{
+            |    "text": "Complete the Pokédex"
+            |}
 
-
-
+        p Response
+        pre
+          code
+            |{
+            |    "id": "513ffe90-4b1a-4ab7-82fb-c46a872af44b",
+            |    "text": "Complete the Pokédex",
+            |    "completed": false
+            |}
+      article
+        h3 Get a specific task
+        p
+          |Returns an object containing the information about a single task, or errors out (404) if it doesn't exist.
+        p
+          code GET /users/:username/tasks/:id
+        p Response
+        pre
+          code
+          |{
+          |    "id": "e7614089-c26d-4456-bdcb-d2d349c3c24a",
+          |    "text": "Hacer la compra",
+          |    "completed": false
+          |}
+      article
+        h3 Patch a specific task
+        p
+          |Modifies the text and/or completion status of a specific task and returns it, or errors out (404) if it doesn't exist.
+        p
+          code PATCH /users/:username/tasks/:id
+        p Body
+        pre
+          code
+            |{
+            |    "text": "Complete the Pokédex in Legends Arceus",
+            |    "completed": true
+            |}
+        p Response
+        pre
+          code
+            |{
+            |    "id": "513ffe90-4b1a-4ab7-82fb-c46a872af44b",
+            |    "text": "Complete the Pokédex in Legends Arceus",
+            |    "completed": true
+            |}
+      article
+        h3 Delete a specific task
+        p Removes a specific task and returns it, or errors out (404) if it doesn't exist.
+        p
+          code DELETE /users/:username/tasks/:id
+        p Response
+        pre
+          code
+            |{
+            |    "id": "f177edcd-a484-4122-bc99-85886e609501",
+            |    "text": "This task has been deleted",
+            |    "completed": false
+            |}
