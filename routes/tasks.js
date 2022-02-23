@@ -6,14 +6,14 @@ const {v4: uuidv4 } = require('uuid')
 const tasks = {}
 
 /* GET tasks list. */
-router.get('/', function(req, res, next) {
+router.get('/:user/tasks', function(req, res, next) {
     const user = req.params.user
     let userTasks = tasks[user] ?? []
     res.json(Object.values(userTasks))
 })
 
 /* POST a new task */
-router.post('/', function(req, res, next) {
+router.post('/:user/tasks', function(req, res, next) {
     const user = req.params.user
 
     if (!tasks[user]) {
@@ -31,7 +31,7 @@ router.post('/', function(req, res, next) {
 })
 
 /* GET specific task. */
-router.get('/:id', function(req, res, next) {
+router.get('/:user/tasks/:id', function(req, res, next) {
     const user = req.params.user
     const id = req.params.id
     if (!tasks[user] || !tasks[user][id]) {
@@ -44,7 +44,7 @@ router.get('/:id', function(req, res, next) {
 })
 
 /* PATCH specific task. */
-router.patch('/:id', function(req, res, next) {
+router.patch('/:user/tasks/:id', function(req, res, next) {
     const user = req.params.user
     const id = req.params.id
     if (!tasks[user] || !tasks[user][id]) {
@@ -62,7 +62,7 @@ router.patch('/:id', function(req, res, next) {
 })
 
 /* DELETE specific task. */
-router.delete('/:id', function(req, res, next) {
+router.delete('/:user/tasks/:id', function(req, res, next) {
     const user = req.params.user
     const id = req.params.id
     if (!tasks[user] || !tasks[user][id]) {
