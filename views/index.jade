@@ -44,7 +44,7 @@ block content
         p
           |Receives the text for a new task and creates it. Returns an object containing the information about the newly created task, including its assigned id and status (not completed).
         p
-          code POST /users/:username/tasks
+          code POST /users/:user/tasks
         p Body
         pre
           code
@@ -65,7 +65,7 @@ block content
         p
           |Returns an object containing the information about a single task, or errors out (404) if it doesn't exist.
         p
-          code GET /users/:username/tasks/:id
+          code GET /users/:user/tasks/:id
         p Response
         pre
           code
@@ -79,7 +79,7 @@ block content
         p
           |Modifies the text and/or completion status of a specific task and returns it, or errors out (404) if it doesn't exist.
         p
-          code PATCH /users/:username/tasks/:id
+          code PATCH /users/:user/tasks/:id
         p Body
         pre
           code
@@ -99,7 +99,7 @@ block content
         h3 Delete a specific task
         p Removes a specific task and returns it, or errors out (404) if it doesn't exist.
         p
-          code DELETE /users/:username/tasks/:id
+          code DELETE /users/:user/tasks/:id
         p Response
         pre
           code

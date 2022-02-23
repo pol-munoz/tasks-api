@@ -40,7 +40,7 @@ Response
 
 Receives the text for a new task and creates it. Returns an object containing the information about the newly created task, including its assigned id and status (not completed).
 
-`POST /users/:username/tasks`
+`POST /users/:user/tasks`
 
 Body
 
@@ -64,7 +64,7 @@ Response
 
 Returns an object containing the information about a single task, or errors out (404) if it doesn't exist.
 
-`GET /users/:username/tasks/:id`
+`GET /users/:user/tasks/:id`
 
 Response
 
@@ -80,7 +80,7 @@ Response
 
 Modifies the text and/or completion status of a specific task and returns it, or errors out (404) if it doesn't exist.
 
-`PATCH /users/:username/tasks/:id`
+`PATCH /users/:user/tasks/:id`
 
 Body
 
@@ -105,7 +105,7 @@ Response
 
 Removes a specific task and returns it, or errors out (404) if it doesn't exist.
 
-`DELETE /users/:username/tasks/:id`
+`DELETE /users/:user/tasks/:id`
 
 Response
 
