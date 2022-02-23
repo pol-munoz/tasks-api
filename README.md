@@ -1,8 +1,8 @@
-#mpwar-tasks
+# mpwar-tasks
 
 Welcome to mpwar-tasks, a simple API for your last challenge.
 
-##Endpoints
+## Endpoints
 
 Parameters:
 
@@ -11,7 +11,7 @@ Parameters:
 - `:id` - Identifies a specific task.
 
 
-###Get all tasks
+### Get all tasks
 
 Returns an array containing the information about all of a user's tasks.
 
@@ -36,7 +36,7 @@ Response
 ]
 ```
 
-###Post a new task
+### Post a new task
 
 Receives the text for a new task and creates it. Returns an object containing the information about the newly created task, including its assigned id and status (not completed).
 
@@ -60,7 +60,7 @@ Response
 }
 ```
 
-###Get a specific task
+### Get a specific task
 
 Returns an object containing the information about a single task, or errors out (404) if it doesn't exist.
 
@@ -76,7 +76,7 @@ Response
 }
 ```
 
-###Patch a specific task
+### Patch a specific task
 
 Modifies the text and/or completion status of a specific task and returns it, or errors out (404) if it doesn't exist.
 
@@ -101,7 +101,7 @@ Response
 }
 ```
 
-###Delete a specific task
+### Delete a specific task
 
 Removes a specific task and returns it, or errors out (404) if it doesn't exist.
 
