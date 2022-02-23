@@ -70,9 +70,10 @@ router.delete('/:id', function(req, res, next) {
         return
     }
 
+    let task = tasks[user][id]
     delete tasks[user][id]
 
-    res.json({})
+    res.json(task)
 })
 
 module.exports = router
