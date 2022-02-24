@@ -1,19 +1,19 @@
 const express = require('express')
-const router = express.Router()
+const router = express.Router({ mergeParams: true })
 const {v4: uuidv4 } = require('uuid')
 
 // Just keep them in memory
 const tasks = {}
 
 /* GET tasks list. */
-router.get('/:user/tasks', function(req, res, next) {
+router.get('/', function(req, res, next) {
     const user = req.params.user
     let userTasks = tasks[user] ?? []
     res.json(Object.values(userTasks))
 })
 
 /* POST a new task */
-router.post('/:user/tasks', function(req, res, next) {
+router.post('/', function(req, res, next) {
     const user = req.params.user
 
     if (!tasks[user]) {
@@ -31,7 +31,7 @@ router.post('/:user/tasks', function(req, res, next) {
 })
 
 /* GET specific task. */
-router.get('/:user/tasks/:id', function(req, res, next) {
+router.get('/:id', function(req, res, next) {
     const user = req.params.user
     const id = req.params.id
     if (!tasks[user] || !tasks[user][id]) {
@@ -44,7 +44,7 @@ router.get('/:user/tasks/:id', function(req, res, next) {
 })
 
 /* PATCH specific task. */
-router.patch('/:user/tasks/:id', function(req, res, next) {
+router.patch('/:id', function(req, res, next) {
     const user = req.params.user
     const id = req.params.id
     if (!tasks[user] || !tasks[user][id]) {
@@ -62,7 +62,7 @@ router.patch('/:user/tasks/:id', function(req, res, next) {
 })
 
 /* DELETE specific task. */
-router.delete('/:user/tasks/:id', function(req, res, next) {
+router.delete('/:id', function(req, res, next) {
     const user = req.params.user
     const id = req.params.id
     if (!tasks[user] || !tasks[user][id]) {
